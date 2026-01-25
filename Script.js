@@ -1,1 +1,1 @@
-
+const core = this;
