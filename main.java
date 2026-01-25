@@ -27,9 +27,13 @@ public class HelloWorldGUI extends Application {
     }
 }
 
-int game = 0;
-int ethics = 0;
-int rules = 0;
-int score = 0;
-boolean = true;
-char = 'A';
+public class NewGame {
+
+  int game = 0;
+  int ethics = 0;
+  int rules = 0;
+  int score = 0;
+  boolean = true;
+  char = 'A';
+
+}
