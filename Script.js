@@ -1,1 +1,2 @@
-const core = this;
+const explinationOne = this;
+console.log(this);
