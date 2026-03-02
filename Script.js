@@ -35,7 +35,7 @@ show()
 
 const user = {
   name: 'John',
-  green: function() {
+  greet: function() {
   console.log(this.name)
 }
 user.greet(); // John
