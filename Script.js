@@ -39,3 +39,5 @@ const user = {
   console.log(this.name)
 }
 user.greet(); // John
+
+// Here, this points to user because user is calling the function.
