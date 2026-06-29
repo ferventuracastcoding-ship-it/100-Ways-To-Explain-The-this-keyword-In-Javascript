@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JavaScript this Keyword Explorer</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+header {
+  padding: 30px;
+  text-align: center;
+  background: #111827;
+  border-bottom: 2px solid #1f2937;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  color: #94a3b8;
+}
+
+.container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: #1e293b;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #334155;
+}
+
+.code {
+  background: #0b1220;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: monospace;
+  color: #38bdf8;
+}
+
+button {
+  margin-top: 10px;
+  padding: 6px 10px;
+  background: #2563eb;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>JavaScript <code>this</code> Keyword Explorer</h1>
+  <p>Powered by MDN-style examples from Mozilla reference docs</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>What is <code>this</code>?</h2>
+    <p>
+      In JavaScript, <code>this</code> refers to the object that is executing the current function.
+      Its value depends on how the function is called.
+    </p>
+    <p>
+      Reference: Mozilla MDN Web Docs
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Search Examples</h2>
+    <input id="search" placeholder="Search example (e.g. 10, arrow, object...)" />
+  </div>
+
+  <div id="examples"></div>
+
+</div>
+
+<script>
+// Generate 100 MDN-style examples of "this"
+const examples = [];
+
+for (let i = 1; i <= 100; i++) {
+  let type = "global context";
+  let code = "";
+
+  if (i <= 20) {
+    type = "global context";
+    code = `console.log(this); // window or global object`;
+  } 
+  else if (i <= 40) {
+    type = "object method";
+    code = `
+const obj${i} = {
+  name: "Object ${i}",
+  show() {
+    return this.name;
+  }
+};
+obj${i}.show();`;
+  } 
+  else if (i <= 60) {
+    type = "constructor function";
+    code = `
+function Person${i}(name) {
+  this.name = name;
+}
+const p = new Person${i}("Alex");
+console.log(p.name);`;
+  } 
+  else if (i <= 80) {
+    type = "arrow function";
+    code = `
+const obj${i} = {
+  name: "Arrow ${i}",
+  show: () => {
+    return this.name; // lexical this
+  }
+};`;
+  } 
+  else {
+    type = "event / callback";
+    code = `
+button.addEventListener("click", function () {
+  console.log(this); // button element
+});`;
+  }
+
+  examples.push({ id: i, type, code });
+}
+
+const container = document.getElementById("examples");
+
+function render(list) {
+  container.innerHTML = "";
+
+  list.forEach(ex => {
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <h3>Example ${ex.id} — ${ex.type}</h3>
+      <div class="code"><pre>${ex.code}</pre></div>
+      <button onclick="navigator.clipboard.writeText(\`${ex.code}\`)">
+        Copy Code
+      </button>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+render(examples);
+
+// Search filter
+document.getElementById("search").addEventListener("input", (e) => {
+  const val = e.target.value.toLowerCase();
+
+  const filtered = examples.filter(ex =>
+    ex.type.includes(val) || String(ex.id).includes(val)
+  );
+
+  render(filtered);
+});
+</script>
+
+</body>
+</html>
