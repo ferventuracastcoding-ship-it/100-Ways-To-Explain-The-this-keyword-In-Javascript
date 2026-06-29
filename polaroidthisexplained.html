@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floating Product Gallery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:radial-gradient(circle at top,#1a1a1a,#0a0a0a);
+color:white;
+}
+
+header{
+text-align:center;
+padding:80px 20px 40px;
+}
+
+header h1{
+font-size:48px;
+letter-spacing:1px;
+}
+
+header p{
+color:#aaa;
+margin-top:10px;
+}
+
+/* GRID */
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:50px;
+padding:60px 10%;
+}
+
+/* POLAROID CARD */
+
+.card{
+background:white;
+color:black;
+padding:15px 15px 25px;
+border-radius:10px;
+box-shadow:0 30px 60px rgba(0,0,0,.5);
+transition:0.5s ease;
+transform:rotate(-4deg);
+position:relative;
+overflow:hidden;
+}
+
+.card:nth-child(even){
+transform:rotate(4deg);
+}
+
+.card:hover{
+transform:translateY(-20px) rotate(0deg);
+box-shadow:0 40px 80px rgba(0,0,0,.7);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.card h3{
+margin-top:15px;
+font-size:20px;
+}
+
+.card p{
+font-size:14px;
+color:#444;
+margin-top:6px;
+}
+
+.price{
+margin-top:10px;
+font-weight:bold;
+color:#111;
+}
+
+/* TAG BADGE */
+
+.badge{
+position:absolute;
+top:15px;
+left:15px;
+background:#ff4d4d;
+color:white;
+padding:5px 10px;
+font-size:12px;
+border-radius:20px;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:60px 20px;
+color:#888;
+font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+header h1{
+font-size:34px;
+}
+
+.container{
+padding:40px 20px;
+gap:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Explaining The <span style="color: yellow;">this</span> Keyword</h1>
+<p>## Explaining the `this` Keyword
+
+The `this` keyword in JavaScript is a special reference that points to the object that is currently executing a function. Its value is not fixed and depends on how and where the function is called. In a global context, `this` refers to the global object, while inside an object method, it refers to the object itself. In constructor functions or classes, `this` represents the newly created instance. However, arrow functions behave differently because they do not have their own `this`; instead, they inherit it from their surrounding scope. Understanding how `this` changes in different situations is essential for writing predictable and bug-free JavaScript code.
+</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<span class="badge">NEW</span>
+<img src="https://picsum.photos/500?1">
+<h3>Global Context (Default Binding)</h3>
+<p>Hconsole.log(this); // window (in browser)</p>
+<div class="price">$10 Trillion</div>
+<p>to know this knowledge</p>
+</div>
+
+<div class="card">
+<span class="badge">HOT</span>
+<img src="https://picsum.photos/500?2">
+<h3>Simple Function Call</h3>
+<p>function show() {
+  console.log(this);
+}
+show(); // window or undefined (strict mode)</p>
+<div class="price">$10 Trillion</div>
+<p>to know this knowledge</p>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/500?3">
+<h3>Object Method</h3>
+<p>const user = {
+  name: "Alex",
+  greet() {
+    console.log(this.name);
+  }
+};
+
+user.greet();</p>
+<div class="price">$10 Trillion</div>
+<p>to know this knowledge</p>
+</div>
+
+<div class="card">
+<span class="badge">SALE</span>
+<img src="https://picsum.photos/500?4">
+<h3>Constructor Function</h3>
+<p>function Person(name) {
+  this.name = name;
+}
+
+const p1 = new Person("John");
+console.log(p1.name); // John</p>
+<div class="price">$10 Trillion</div>
+<p>to know this knowledge</p>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/500?5">
+<h3>Arrow Functions (Lexical this)</h3>
+<p>const obj = {
+  name: "Sam",
+  greet: () => {
+    console.log(this.name);
+  }
+};
+
+obj.greet(); // undefined (inherits outer scope)</p>
+<div class="price">$10 Trillion</div>
+<p>to know this knowledge</p>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/500?6">
+<h3>Event Handlers</h3>
+<p>button.addEventListener("click", function () {
+  console.log(this); // button element
+});</p>
+<div class="price">$10 Trillion</div>
+<p>to know this knowledge</p>
+</div>
+
+<div class="card">
+<span class="badge">NEW</span>
+<img src="https://picsum.photos/500?7">
+<h3>Class Context</h3>
+<p>class Car {
+  constructor(brand) {
+    this.brand = brand;
+  }
+
+  show() {
+    console.log(this.brand);
+  }
+}
+
+const c = new Car("Tesla");
+c.show(); // Tesla</p>
+<div class="price">$10 Trillion</div>
+<p>to know this knowledge</p>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/500?8">
+<h3>Explicit Binding (call, apply, bind)</h3>
+<p>function show() {
+  console.log(this.name);
+}
+
+const user = { name: "Emma" };
+
+show.call(user); // Emma</p>
+<div class="price">$10 Trillion</div>
+<p>to know this knowledge</p>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/500?9">
+<h3>Hard Binding</h3>
+<p>class Car {
+  constructor(brand) {
+    this.brand = brand;
+  }
+
+  show() {
+    console.log(this.brand);
+  }
+}
+
+const c = new Car("Tesla");
+c.show(); // Tesla</p>
+<div class="price">$10 Trillion</div>
+<p>to know this knowledge</p>
+</div>
+
+</div>
+
+<footer>
+© 2026 Floating Gallery Store • Built with HTML & CSS
+</footer>
+
+</body>
+</html>
