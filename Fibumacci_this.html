@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Recursive "this" Keyword Examples</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#101522;
+    color:white;
+}
+
+header{
+    text-align:center;
+    padding:40px;
+    background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+}
+
+header h1{
+    font-size:2.3rem;
+}
+
+header p{
+    margin-top:10px;
+    opacity:.8;
+}
+
+.container{
+    width:95%;
+    max-width:1100px;
+    margin:auto;
+    padding:30px;
+}
+
+.card{
+    background:#1c2436;
+    margin:30px 0;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 0 20px rgba(0,0,0,.4);
+    animation:fadeUp .8s ease;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.card h2{
+padding:20px;
+background:#26324d;
+}
+
+.content{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+padding:20px;
+}
+
+pre{
+background:#111827;
+padding:15px;
+border-radius:10px;
+overflow:auto;
+font-size:14px;
+color:#7dd3fc;
+}
+
+.demo{
+background:#0f172a;
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+button{
+padding:12px 22px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+transition:.3s;
+}
+
+button:hover{
+background:#2563eb;
+transform:scale(1.05);
+}
+
+.output{
+margin-top:20px;
+min-height:80px;
+font-size:20px;
+}
+
+.circle{
+width:60px;
+height:60px;
+border-radius:50%;
+background:#22c55e;
+margin:20px auto;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:22px;
+font-weight:bold;
+transition:.4s;
+}
+
+.bar{
+height:25px;
+background:#6366f1;
+margin:8px;
+border-radius:10px;
+transition:.4s;
+}
+
+@media(max-width:800px){
+.content{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Recursive "this" Keyword</h1>
+<p>Interactive JavaScript Examples</p>
+</header>
+
+<div class="container">
+
+<!-- Example 1 -->
+
+<div class="card">
+
+<h2>1. Recursive Countdown</h2>
+
+<div class="content">
+
+<pre>
+const counter={
+ count:5,
+
+ countdown(){
+   if(this.count<0)return;
+
+   console.log(this.count);
+
+   this.count--;
+
+   this.countdown();
+ }
+};
+</pre>
+
+<div class="demo">
+
+<div class="circle" id="countCircle">5</div>
+
+<button onclick="runCountdown()">
+Run Countdown
+</button>
+
+<div class="output" id="countOutput"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Example 2 -->
+
+<div class="card">
+
+<h2>2. Recursive Factorial</h2>
+
+<div class="content">
+
+<pre>
+const math={
+ factorial(n){
+
+  if(n<=1)return 1;
+
+  return n*this.factorial(n-1);
+
+ }
+};
+</pre>
+
+<div class="demo">
+
+<button onclick="runFactorial()">
+Calculate 5!
+</button>
+
+<div class="output" id="factorialOutput"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Example 3 -->
+
+<div class="card">
+
+<h2>3. Recursive Fibonacci</h2>
+
+<div class="content">
+
+<pre>
+const fib={
+
+ calculate(n){
+
+  if(n<2)return n;
+
+  return this.calculate(n-1)+
+         this.calculate(n-2);
+
+ }
+
+};
+</pre>
+
+<div class="demo">
+
+<button onclick="runFibonacci()">
+Generate Sequence
+</button>
+
+<div id="bars"></div>
+
+<div class="output" id="fibOutput"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// Example 1
+
+function runCountdown(){
+
+const circle=document.getElementById("countCircle");
+
+const output=document.getElementById("countOutput");
+
+output.innerHTML="";
+
+const counter={
+
+count:5,
+
+countdown(){
+
+if(this.count<0)return;
+
+circle.innerHTML=this.count;
+
+circle.style.transform="scale(1.3)";
+setTimeout(()=>{
+circle.style.transform="scale(1)";
+},150);
+
+output.innerHTML+=this.count+" ";
+
+this.count--;
+
+setTimeout(()=>this.countdown(),500);
+
+}
+
+};
+
+counter.countdown();
+
+}
+
+// Example 2
+
+function runFactorial(){
+
+const output=document.getElementById("factorialOutput");
+
+const math={
+
+factorial(n){
+
+if(n<=1)return 1;
+
+return n*this.factorial(n-1);
+
+}
+
+};
+
+let result=math.factorial(5);
+
+output.innerHTML="5! = "+result;
+
+output.animate([
+{transform:"scale(.5)"},
+{transform:"scale(1.2)"},
+{transform:"scale(1)"}
+],{
+duration:700
+});
+
+}
+
+// Example 3
+
+function runFibonacci(){
+
+const bars=document.getElementById("bars");
+
+const output=document.getElementById("fibOutput");
+
+bars.innerHTML="";
+
+const fib={
+
+calculate(n){
+
+if(n<2)return n;
+
+return this.calculate(n-1)+this.calculate(n-2);
+
+}
+
+};
+
+let text="";
+
+for(let i=0;i<8;i++){
+
+let value=fib.calculate(i);
+
+text+=value+" ";
+
+let bar=document.createElement("div");
+
+bar.className="bar";
+
+bar.style.width=(value*35+30)+"px";
+
+bars.appendChild(bar);
+
+}
+
+output.innerHTML=text;
+
+}
+</script>
+
+</body>
+</html>
