@@ -1,7 +1,6 @@
 // Explaining the this keyword in a function
 // Constructor function used to create Person objects
 function Person(name, age) {
-
   // Store the value passed in as 'name' on the new object.
   // Example: this.name = "Alice"
   this.name = name;
