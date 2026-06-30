@@ -1,4 +1,4 @@
-console.log(this);
+// Explaining the this keyword in a function
 function Person(){
   this.name = name;
   thia.age = age;
