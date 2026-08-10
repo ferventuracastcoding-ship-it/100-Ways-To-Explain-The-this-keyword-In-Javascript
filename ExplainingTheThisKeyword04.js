@@ -8,3 +8,6 @@ const data {
     const sos = ${planet} ${status};
   }
 }
+console.log(this.value);
+console.log(this.planet);
+console.log(this.status);
