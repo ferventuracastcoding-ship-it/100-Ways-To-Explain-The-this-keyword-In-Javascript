@@ -1,3 +1,7 @@
+const temp = this.data
+console.log("this is equals to ", temp);
+
+// Random example of not important code
 const temp = this.data;
 // store object
 const store = {
