@@ -1,3 +1,5 @@
+// Explaining the this keyword
+// Why is the this keyword so important
 class Explain {
   const win = console.log(this);
 
