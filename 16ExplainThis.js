@@ -1,5 +1,5 @@
 // Explaining the this keyword
-// why is the this keywors so important?
+// why is the this keyword so important?
 const TwoSum(nums, target) {
   // this.data = data
   // this.vale = value;
